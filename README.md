@@ -20,6 +20,44 @@ the SHA-256 of every download.
 
 ## Release notes
 
+### 1.4.0 - 2026-10-22
+
+#### Added
+
+- `ifconfig` on a Linux or macOS server now shows each interface as a card, with its address, prefix and MAC
+  address, and its flags, MTU, traffic and any errors or drops when you open it. This also works for the
+  older BusyBox layout in Alpine containers. `ifconfig -s` shows packet counters for each interface, the same
+  way `netstat -i` does.
+- Tab completion now works in bash sessions over SSH. Press Tab or Ctrl+Space to complete commands, file and
+  folder paths, options, `$` variables, and arguments such as `systemctl` units, `git` subcommands or `apt`
+  packages, using the completions installed on the server. Names with spaces are escaped for you, and it
+  works while a command is still running.
+- Choose how you sign in to each server. The first connection to a server always uses its password. After
+  that you can pick a password each time, a saved password, or an SSH key that BetterTerminal creates for that
+  server alone, and change it later from **Host settings**. Windows servers can use SSH keys too: BetterTerminal
+  can turn on OpenSSH Server and PowerShell remoting over SSH for you (PowerShell 7 must be installed).
+- SSH keys are rotated automatically on a schedule you set (90 days by default, adjustable per server, with an
+  optional machine-wide limit). A due key is replaced the next time you connect, and **Rotate now** does it on
+  demand.
+- On Linux servers, `sudo` can use a saved sudo password, or a passwordless sudo rule that BetterTerminal
+  installs and checks for you, so elevated commands don't keep asking.
+- Servers that refuse passwords can still be connected the first time by confirming that your existing SSH
+  keys should be used.
+
+#### Changed
+
+- `top -b` output on a Linux server now shows the same process card as `ps`: the top memory and CPU users with
+  the full list behind **Show all**, or a bar chart when you sort with `-o %MEM` or `-o %CPU`. The load, CPU
+  and memory summary lines are no longer shown on the card.
+  `top`, `htop` and `btop` on their own still open full-screen as before.
+
+#### Security
+
+- Saved passwords and SSH keys are now kept in an encrypted vault protected by the PC's TPM and Windows Hello,
+  or by a master password on PCs without them. SSH keys never leave the TPM unencrypted, and each key only
+  works with the server it was made for. Passwords saved by earlier versions move into the vault the first
+  time you unlock it.
+
 ### 1.2.0 - 2026-10-21
 
 #### Added
