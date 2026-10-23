@@ -20,6 +20,16 @@ the SHA-256 of every download.
 
 ## Release notes
 
+### 1.8.0 - 2026-10-23
+
+#### Changed
+
+- Each session detail now appears once, giving the timeline more room. The tab names the computer, the bar above the charts shows how you're connected along with the OS, shell version, user and uptime, and the working directory moves into the prompt itself, as in PowerShell.
+- The local tab and command cards show the computer's name instead of "localhost".
+- Incident recording sits in the bar above the charts instead of taking a row of its own, and the 15m/30m/60m range and the collapse and expand buttons sit beside the chart's time axis.
+- Sessions, Disconnect, sign-in settings and End session are in the menu on the connection pill (Local, WinRM, SSH). The new-tab menu also offers Manage sessions.
+- The alerts bell shows a count only when other tabs have alerts; the active tab's badge already shows its own.
+
 ### 1.7.0 - 2026-10-23
 
 #### Added
