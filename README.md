@@ -20,6 +20,17 @@ the SHA-256 of every download.
 
 ## Release notes
 
+### 1.7.0 - 2026-10-23
+
+#### Added
+
+- Linux bash tabs can switch users with `sudo su`, `sudo -i`, and related shell commands. Subsequent commands and the prompt use the selected user until `exit`; nested switches restore the previous directory and exports. Persistent helper sessions retain the switched user when resumed.
+
+#### Fixed
+
+- Stopping a command in a bash tab keeps the shell alive when it handles the interrupt, including while switched to another user. Ending a helper session also stops switched shells and their terminal programs.
+- Resuming a helper session no longer logs duplicate history inserts, and ending active work no longer reports a stale alert refresh as an engine failure.
+
 ### 1.6.1 - 2026-10-23
 
 #### Fixed
