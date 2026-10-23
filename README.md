@@ -20,6 +20,24 @@ the SHA-256 of every download.
 
 ## Release notes
 
+### 1.6.1 - 2026-10-23
+
+#### Fixed
+
+- Command, script and runbook cards no longer show an empty output box while running silently or after finishing without output.
+
+### 1.6.0 - 2026-10-23
+
+#### Changed
+
+- Session controls now share the host, working directory and shell information row above the command entry, leaving more room for command output. They wrap when the window is narrow.
+
+#### Fixed
+
+- Brief Windows file locks no longer interrupt saving persistent sessions during connect or reconnect.
+- Resuming or ending a disconnected WinRM session now uses its original account and offers fresh credentials when Windows cannot reuse the saved logon context, without deleting the saved password or changing the host's sign-in setting.
+- Session errors display readable messages instead of raw WinRM XML, and errors already shown in a session dialog no longer also appear as oversized notifications.
+
 ### 1.5.0 - 2026-10-22
 
 #### Added
