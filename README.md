@@ -20,6 +20,17 @@ the SHA-256 of every download.
 
 ## Release notes
 
+### 1.5.0 - 2026-10-22
+
+#### Added
+
+- Remote connections now offer persistent sessions that keep shell state and running work through app closure or a network drop. Choose native WinRM persistence without installing anything, an optional per-user session helper, or a temporary session. Helper setup asks for permission and can provision its own verified runtime.
+- A Sessions button above the command entry lets you find, switch, resume, and create sessions on the same host. Disconnect keeps persistent sessions available; End session explicitly stops their work and discards shell state.
+
+#### Fixed
+
+- First-connect sign-in settings now open in a floating dialog instead of appearing inside the command timeline.
+
 ### 1.4.0 - 2026-10-22
 
 #### Added
