@@ -20,6 +20,12 @@ the SHA-256 of every download.
 
 ## Release notes
 
+### 1.9.1 - 2026-10-24
+
+#### Fixed
+
+- The Alerts toolbar icon now keeps its alert count visible when only the active tab has alerts, including after closing a duplicate tab.
+
 ### 1.9.0 - 2026-10-23
 
 #### Added
