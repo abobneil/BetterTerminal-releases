@@ -20,6 +20,18 @@ the SHA-256 of every download.
 
 ## Release notes
 
+### 1.9.0 - 2026-10-23
+
+#### Added
+
+- Shared credentials: save one password in the vault and use it for several hosts that sign in with the same account. Choose "Also use it for other hosts" when you save a host's password, or create one in Settings → Sign-in and keys, then pick it under "Sign in with" in New session.
+- Settings → Sign-in and keys lists your shared credentials while the vault is unlocked. You can add or remove hosts, rename or delete a credential, and update its password once for every host. BetterTerminal signs in to a linked host to check a new password before saving it. If that host can't be reached it tries the next one, and a rejection stops the update.
+- On Linux hosts, a shared credential can also answer sudo.
+
+#### Fixed
+
+- Saving a password for a host now works when another tab to the same host is already open.
+
 ### 1.8.0 - 2026-10-23
 
 #### Changed
