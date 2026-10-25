@@ -20,6 +20,13 @@ the SHA-256 of every download.
 
 ## Release notes
 
+### 1.10.0 - 2026-10-25
+
+#### Added
+
+- Play while you wait: when a command runs for 20 seconds or more, a button on its card opens a game of Command Breaker inside the card. It pauses whenever you click away, Esc returns to the prompt, and when the command ends the game pauses and shows the result.
+- Timed nudges: turn on friendly reminders to hydrate and stretch, shortcut tips, sysadmin jokes and a few hidden easter eggs. Choose how often and which kinds in "Nudges and wait game settings…" in the command palette. Nudges wait while you type, while you're recording an incident, or while the window is minimized.
+
 ### 1.9.1 - 2026-10-24
 
 #### Fixed
