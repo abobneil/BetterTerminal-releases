@@ -20,6 +20,33 @@ the SHA-256 of every download.
 
 ## Release notes
 
+### 1.11.0 - 2026-10-27
+
+#### Added
+
+- Settings: the gear button in the title bar (or Ctrl+,) opens one place for every preference: output font and text size, the metrics strip, the alerts drawer side and ignored alerts, AI questions, nudges and the wait game, and sign-in and keys.
+- An ⓘ menu in the title bar with Keyboard shortcuts, the Command palette, and About and updates. It shows a dot when an update is ready to install.
+- Keep working while a command runs. Press Enter to queue the next command: queued commands wait above the prompt and run in order in the same tab when the one before finishes. You can reorder them, remove them, or clear the queue. Press Ctrl+Enter to run a command right away, in parallel, in a side shell. It starts in the tab's folder but doesn't share the tab's variables, and its card is marked Parallel.
+- Show or hide the master password and confirmation while setting up or changing the vault password.
+- Open vault settings from the key entry in the dropdown beside the vault lock. The lock still locks or unlocks the vault directly.
+- robocopy gets its own card. While a copy runs on this computer, the card shows how much is copied out of the total, the time left and when it should finish, the last file and whether it copied, and the files being copied right now with their progress. Copies on remote computers show the same card without the total and time left, which robocopy doesn't print.
+- When robocopy finishes, the card lists everything that failed, grouped by reason, with the reason for each file or folder in plain words: a folder renamed or deleted during the copy, a file open in another program, access denied, Revit backup files, Office lock files and more. Copy the list, or run the copy again leaving out the lock, temp and backup files that don't matter.
+
+#### Changed
+
+- The title bar's Command palette and Keyboard shortcuts buttons moved into the ⓘ menu. Ctrl+Shift+P, Ctrl+K and F1 work as before.
+- Keyboard shortcuts now uses a keyboard icon in the ⓘ menu, the command palette and the shortcuts dialog.
+- "Nudges and wait game settings…" in the command palette now opens Settings on Nudges and game.
+
+#### Fixed
+
+- Network metrics now show a green status when readings are available instead of remaining grey.
+
+- Esc now closes a dialog after you close another dialog opened from it (for example Ignored alerts opened from Settings). Before, focus was lost and Esc did nothing.
+- Opening a password-protected vault for the first time now asks you to create and confirm a master password instead of asking for one you have not set up.
+- A robocopy that copied files no longer shows as failed. robocopy's exit codes 1 to 7 mean success.
+- A very large robocopy copy keeps its card when it finishes, however many lines it printed.
+
 ### 1.10.0 - 2026-10-25
 
 #### Added
