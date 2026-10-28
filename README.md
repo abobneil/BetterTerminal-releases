@@ -20,6 +20,26 @@ the SHA-256 of every download.
 
 ## Release notes
 
+### 1.12.0 - 2026-10-27
+
+#### Added
+
+- See every command that's still running, and stop it, even after its card has scrolled away. Commands out of view get a chip above the prompt with a live timer and a stop button, and a marker on the timeline's scroll bar. Other tabs show how many commands are running in them.
+- Know when a long command finishes while you're looking elsewhere. It gets a toast with View, stays flagged in green or red until you look at the result, and sends a Windows notification if BetterTerminal is minimized or in the background.
+- Activity (the pulse button in the title bar, or Ctrl+Shift+A) lists everything running or finished on every tab, with Show, Stop and Stop all. Arrow keys select, Enter shows the command and Delete stops it.
+- A running command's options can stop it after 10 minutes, 30 minutes or an hour, or notify you when it's done.
+- Commands that never end on their own, like ping -t, Get-Content -Wait or tail -f, are marked with ∞. If one has been out of view for 15 minutes you get a reminder to stop it, show it, or keep it running.
+- Microsoft 365 modules without Install-Module. Type a command like Connect-ExchangeOnline, Get-MgUser or Get-SPOSite and, if its module isn't installed, a card on that command offers to install it; then run the command again. Or install ahead of time in Settings → Microsoft 365. Packs: Exchange Online (with Security & Compliance), Microsoft Graph, Graph beta, Microsoft Entra, Teams, SharePoint Online, PnP and Azure; optional Power Platform admin, MSCommerce, AIP Service and Power BI; and WinGet.
+- Each pack runs in its own background PowerShell session for the tab, so modules that clash with each other (Exchange and Teams, SharePoint and PnP) work side by side, and Windows PowerShell-only modules (Power Platform admin) work from a PowerShell 7 tab. Graph, Graph beta and Entra share one session and sign-in.
+- BetterTerminal installs the module versions it has tested and checks every download against them. Updates appear in Settings → Microsoft 365. "Always install the newest versions" is available if you'd rather follow PSGallery.
+- Retired commands get a pointer to their replacement: Get-MsolUser and Get-AzureADUser point to Microsoft Entra, New-CsOnlineSession to Teams, the Intune Graph module to Microsoft Graph, AADRM to AIP Service.
+- Active Directory, Group Policy, DNS and DHCP commands offer to install the missing RSAT tools through Windows when they aren't there.
+
+#### Changed
+
+- Pressing Enter while a command that never ends is running no longer queues the next command forever. You choose to run it alongside, stop the running command first, or queue it anyway.
+- Closing a tab while commands are still running in it asks first and lists them.
+
 ### 1.11.0 - 2026-10-27
 
 #### Added
