@@ -20,6 +20,16 @@ the SHA-256 of every download.
 
 ## Release notes
 
+### 1.12.1 - 2026-10-28
+
+#### Fixed
+
+- Microsoft Graph, Graph beta, Microsoft Entra, Azure and Power BI commands now work after their pack is installed. Before, only the pack's first module was set up, so Connect-MgGraph worked but Get-MgUser and most other commands still said "not recognized". Packs installed with 1.12.0 are repaired automatically the next time BetterTerminal starts.
+- The Azure pack installs and runs. Az.Resources (Get-AzResourceGroup and other resource commands) failed to load with "manifest definition does not match" because BetterTerminal carried an older copy of a library it needs.
+- The install card no longer says "Installed" when the last step of an install failed; it shows what went wrong and offers to try again.
+- If an installed pack's command still isn't found, its card now offers Repair instead of showing nothing.
+- Graph, Graph beta and Azure commands from modules outside the pack (like Get-MgApplication or Get-AzWebApp) now offer to add their module. BetterTerminal's PSGallery search for them returned no results.
+
 ### 1.12.0 - 2026-10-27
 
 #### Added
