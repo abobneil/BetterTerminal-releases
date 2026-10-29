@@ -20,6 +20,33 @@ the SHA-256 of every download.
 
 ## Release notes
 
+### 1.13.0 - 2026-10-29
+
+#### Added
+
+- Microsoft 365 output now shows as cards instead of long tables:
+  - **Users and recipients** (Get-User, Get-Recipient, Get-Mailbox, Get-EXOMailbox, Get-MgUser): counts by kind on the left (people, shared mailboxes, rooms, equipment, service accounts), a searchable list in the middle and the selected user on the right. Guests, GUID-named accounts and HealthMailbox and other system mailboxes fold away, so the people aren't buried.
+  - **Message trace** (Get-MessageTraceV2, Get-MessageTrace): a status bar and chips over a newest-first table, with failed and quarantined messages marked. Click a message for its details and the command that shows its delivery events.
+  - **Licenses** (Get-MgSubscribedSku): product names instead of part numbers, a warning for each subscription that is suspended, over-assigned, full or nearly full, and a table of every SKU with how much of it is used. Free and trial SKUs are hidden until you ask for them.
+  - **Mailbox size** (Get-MailboxStatistics, Get-EXOMailboxStatistics): filter by mailbox type and archive state, sort by size, and see each mailbox against its send limit. One mailbox shows its primary and archive side by side.
+  - **Groups** (Get-UnifiedGroup, Get-DistributionGroup, Get-DynamicDistributionGroup, Get-MgGroup): group types and "needs a look" filters (no owner, empty, accepts external senders, has guests), a searchable list, and the selected group with its welcome message (On, Off or Doesn't apply) first, then its settings and owners. A button inserts the command that lists its members.
+  - **Group members** (Get-DistributionGroupMember, Get-UnifiedGroupLinks, Get-MgGroupMember): members counted and filtered by kind: users, guests, nested groups, mailboxes and contacts.
+
+#### Changed
+
+- Microsoft 365 commands now run in one card. Type `Get-Mailbox` or `Get-MgUser` and the command waits in its own card while BetterTerminal gets it ready, then shows its output there. You no longer run Connect-ExchangeOnline yourself or click Run again.
+  - Installing a pack, or Windows' RSAT tools, still asks first: click Install, or Not now to cancel the command.
+  - Stop cancels the command at any step, including while it waits for you to sign in.
+  - Signing in happens by itself when a command needs it, for Exchange Online, Microsoft Graph, Entra, Teams, SharePoint, PnP, Azure, Power BI and AIP. Microsoft Graph asks only for the permissions the command needs. Exchange Online's welcome banner no longer fills the card.
+  - SharePoint Online and PnP ask for your tenant name once and remember it.
+  - Graph and Azure modules outside the pack are added without asking. A pack whose commands weren't set up repairs itself.
+  - If you decline, or the sign-in doesn't finish, the command fails with the reason instead of "not recognized".
+
+#### Fixed
+
+- Signing in to Exchange Online, Microsoft Graph or Azure no longer fails with "A window handle must be configured". The Windows sign-in window now opens over BetterTerminal and stays in front until you finish, instead of opening behind other windows.
+- Microsoft 365 output now includes the fields that come late in each object, such as a user's recipient type and UPN, and license seat counts, which used to arrive as a type name.
+
 ### 1.12.1 - 2026-10-28
 
 #### Fixed
