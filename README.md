@@ -20,6 +20,13 @@ the SHA-256 of every download.
 
 ## Release notes
 
+### 1.15.0 - 2026-10-31
+
+#### Added
+
+- Tab completion in switch and firewall tabs (Aruba AOS-CX, ArubaOS-Switch, ArubaOS 8/10, PAN-OS and Sophos). A built-in command list appears at once, then the device's own answer replaces it, so you see exactly what that firmware offers, including configuration-mode commands and live values like interface names. Accepting a word adds a space so you can keep pressing Tab, and value hints such as `<1-4094>` show what to type next without inserting anything. While a command is still running, Tab uses only the built-in list and leaves the device alone.
+- Tab completion for every Microsoft 365 module pack command (Exchange Online, Microsoft Graph, Entra, Teams, SharePoint Online, PnP, Azure, Power Platform, Power BI and more), including parameters and their allowed values, even before the pack is installed. Running a completed command from a pack you don't have yet offers to install it as before. Exchange Online cmdlets such as `Get-Mailbox` complete by name until you've connected; after that their parameters complete too.
+
 ### 1.14.0 - 2026-10-31
 
 #### Added
