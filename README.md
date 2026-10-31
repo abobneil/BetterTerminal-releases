@@ -20,6 +20,20 @@ the SHA-256 of every download.
 
 ## Release notes
 
+### 1.14.0 - 2026-10-31
+
+#### Added
+
+- Connect to switches and firewalls over SSH and get cards for their output: Aruba AOS-CX, ArubaOS-Switch, ArubaOS 8/10 controllers, Palo Alto PAN-OS and Sophos Firewall. BetterTerminal recognises the device, turns paging off, and shows its own prompt (`switch#`, `admin@fw>`, `console>`). On Sophos it opens the Device Console for you.
+- Network cards for the everyday show commands, the same layout whichever vendor printed them:
+  - **Ports and interfaces**: a port grid with up, down and admin-down ports, LAG and PoE state, and a detail card per port with errors and drops first.
+  - **VLANs, spanning tree, LACP and LLDP**: VLAN membership by port, the root bridge and blocked ports, LAG members with their LACP problems, and neighbours.
+  - **Routing**: routes grouped by protocol with distance and metric, BGP/OSPF peers, tunnels and HA/cluster state.
+  - **Firewall policy**: security and NAT rules with hit counts, policy-match verdicts, sessions and drop counters.
+  - **System**: version and licences, CPU, memory and disk health, logs, configuration outlines, jobs and certificates.
+- Some cards quietly run a related read-only command to fill themselves in (for example rule hit counts next to the rule list). Only read-only `show` commands are ever run this way, and they never appear in your history.
+- Pasted output from these devices (in Paste output) becomes the same cards.
+
 ### 1.13.0 - 2026-10-29
 
 #### Added
