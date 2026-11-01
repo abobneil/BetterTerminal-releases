@@ -20,6 +20,14 @@ the SHA-256 of every download.
 
 ## Release notes
 
+### 1.16.0 - 2026-11-01
+
+#### Added
+
+- Connect to Cisco IOS and IOS-XE switches and routers, Fortinet FortiGate firewalls (FortiOS) and Juniper Junos devices (EX, SRX, MX) over SSH, and get the same network cards as for Aruba, PAN-OS and Sophos: ports and interfaces, VLANs, MAC/ARP, CDP/LLDP neighbours, spanning tree and port-channels, routes, BGP/OSPF/EIGRP peers, HSRP/VRRP, HA clusters, IPsec tunnels and SD-WAN health, device facts with licences and FortiGuard contracts, health, configuration and config diffs, ACLs and firewall policies with hit counts, NAT, sessions, 802.1X clients, RADIUS/TACACS servers and wireless APs. BetterTerminal recognises the device, turns paging off without changing its configuration, strips Junos `{master:0}` lines, and handles Cisco `enable`.
+- Tab completion for Cisco, FortiOS and Junos tabs: a built-in list of their common commands at once, then the device's own answer, including Junos `|` pipe options.
+- Pasting a Cisco, FortiGate or Junos transcript into the paste viewer turns each command into its card.
+
 ### 1.15.0 - 2026-10-31
 
 #### Added
