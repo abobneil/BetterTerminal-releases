@@ -20,6 +20,25 @@ the SHA-256 of every download.
 
 ## Release notes
 
+### 1.17.0 - 2026-11-03
+
+#### Added
+
+- Cards for hypervisor output: Hyper-V, Failover Cluster and Azure Local (Storage Spaces Direct), VMware vSphere (PowerCLI, the ESXi shell and the vCenter appliance), Nutanix (CVM and AHV), Proxmox VE with Proxmox Backup Server and Ceph, XCP-ng / XenServer, KVM/libvirt and VirtualBox. The same card works on every platform:
+  - VMs and containers, with problems first, one VM in detail (including Proxmox changes that apply on the next reboot), snapshot trees with old-snapshot warnings, and passthrough devices.
+  - Hosts, capacity with a "can the cluster lose a host?" verdict, cluster membership and quorum, HA groups and placement rules, services and installed vs running versions.
+  - Datastores and storage pools, virtual disks and their parent chains, distributed storage health (S2D, vSAN, Nutanix, Ceph) and ESXi storage paths.
+  - Virtual switches, bridges, bonds and VM network adapters with guest IPs.
+  - Replication, backups and retention, tasks, health checks (Nutanix NCC, `virt-host-validate`, `Test-Cluster`) and the result of start, stop, migrate, snapshot, clone and backup commands, including silent successes and structured errors.
+  - Nutanix `allssh` / `hostssh` output folds identical nodes and shows the ones that differ first.
+- Cards fill in details the command itself doesn't print (vCPU and memory for Hyper-V VMs, snapshot ages, guest IPs, uplink state, storage faults) by running extra read-only commands in the background on PowerShell and SSH tabs. Only commands on a fixed read-only list can run this way.
+- Connect to VMware ESXi hosts over SSH, and to the vCenter Server Appliance shell, including its `shell` command and back.
+- Pasting a Linux shell transcript (Proxmox, XCP-ng, KVM, Nutanix, ESXi and others) into the paste viewer keeps each command, so its output gets the right card.
+
+#### Fixed
+
+- Closing a tab whose SSH connection has already dropped no longer fails with "Client not connected".
+
 ### 1.16.0 - 2026-11-01
 
 #### Added
