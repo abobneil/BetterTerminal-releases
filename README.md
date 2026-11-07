@@ -20,6 +20,21 @@ the SHA-256 of every download.
 
 ## Release notes
 
+### 1.18.0 - 2026-11-07
+
+#### Added
+
+- Cards for HPE Morpheus VM Essentials (HPE VME) hosts. BetterTerminal recognises a VME host when you connect, and `hvmcli` output becomes the same hypervisor cards the other platforms use:
+  - VMs (`vm list`), host facts, CPU, memory and PCI devices, interfaces with their LLDP neighbour and SR-IOV room, networks and virtual switches.
+  - Storage pools (GFS2 shown as shared), multipath and iSCSI paths, cluster quorum and members, health checks, FIPS status, software versions and update history.
+  - Start, stop, restart and reboot results, and a "run it with sudo" hint when a command needs root.
+  - `virsh` on a VME host uses the KVM / libvirt cards, labelled HPE VME. Row actions use `hvmcli` for power and `virsh` for snapshots.
+  - `hvmcli top`, `logs --live`, `health watch` and `tui` stay as plain terminal output.
+
+#### Fixed
+
+- PowerShell cards (Hyper-V VMs, switches and disks, and other object output) no longer lose names and other fields when the PC is busy.
+
 ### 1.17.0 - 2026-11-03
 
 #### Added
