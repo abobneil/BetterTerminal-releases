@@ -20,6 +20,50 @@ the SHA-256 of every download.
 
 ## Release notes
 
+### 1.20.0 - 2026-11-21
+
+#### Added
+
+- VMware PowerCLI is a module pack. Type `Connect-VIServer` (or any PowerCLI command) and BetterTerminal offers to install it, or install it in Settings › Module packs. It loads in the tab after Windows' own modules, so on a Hyper-V PC `Get-VM` and `Get-VMHost` stay Hyper-V's until you connect to vCenter or ESXi. Installing it downloads about 410 MB from PSGallery.
+- When `Connect-VIServer` fails on a self-signed certificate, the card offers the command again with PowerCLI asking whether to trust the certificate, for this session only.
+- `Get-VMHostNetworkAdapter` (PowerCLI) shows the host's physical NICs with link speed and duplex, and its VMkernel adapters with port group, address, MTU and the traffic each carries (Management, vMotion, vSAN and more).
+- Choose how often a host's metrics are read: click the rate on the metric strip and pick Auto, every 1 s, every 5 s or Off. The choice is saved for that host. Hovering the rate, or the graphs, says how often readings come and why, for example "Every 250 ms · auto", "slowed: host busy" or "hidden tab".
+- Command suggestions open as soon as you type one letter of a command, in PowerShell and bash tabs. Each command has a short description, and the list is grouped into the commands you ran recently in this tab, BetterTerminal's own commands, PowerShell commands, module pack commands, aliases and programs. Press → at the end of the line or F1 to see the command's syntax and where it comes from; the app remembers whether you left this open.
+- Your recent and most-used commands are listed first, so a single letter finds commands such as Get-Service instead of rarely used ones.
+
+#### Changed
+
+- Settings › Microsoft 365 is now Settings › Module packs, with Microsoft 365, VMware and Windows groups.
+- The metric strip scrolls smoothly and reacts faster. The local PC and Linux hosts over SSH are read every 250 ms, and Windows hosts over WinRM every 1 s. On Auto the rate slows down when the host is busy, or when reading costs the host more than half a percent of one CPU core (one percent over PowerShell remoting, where each reading has a fixed remoting cost). Each new reading glides in and the line still ends at the last real reading: nothing is guessed between readings. With reduced motion turned on in Windows, the strip updates in steps as before.
+- Reading metrics costs your hosts less. A Linux host runs one light loop with no new process per reading, and a Windows host runs one long-running remote command instead of a new remote command with five WMI queries every second. On the test hosts that cut the collector's CPU use by about three quarters, even when reading four times as often.
+- The rate adapts so it never overloads a host. It slows down when readings come in late, when the host's CPU is already high, when reading would cost the host more than a sliver of a core, or when the host throttles requests. Tabs you are not looking at are read every 2 s, and every tab every 5 s while the window is minimized. Alerts still arrive as before.
+- After a failed sign-in the strip stops reading that host instead of retrying, so it cannot lock the account or trip SSH login limits. Pick a rate to try again.
+- On XCP-ng the strip is labelled dom0 and, where xentop is available, shows the whole host's CPU. On a Nutanix controller VM it is labelled CVM, because the readings are the CVM's, not the host's.
+- When the suggestion list opens by itself, Enter runs exactly what you typed unless you move the highlight with the arrow keys. Tab takes the highlighted command, and Esc hides the list until your next command. Network devices still complete on Tab only.
+
+#### Fixed
+
+- The metric strip no longer shows readings it did not take. When samples are missing (a dropped connection, a reconnect, a failed reading) the line breaks instead of being drawn straight across the gap, and the crosshair shows "—" inside a gap. A value the host did not report, such as the first CPU or network reading before there is anything to compare it with, or a counter that failed, shows as "not reported" instead of 0%, and a lane with no readings in range says so instead of drawing a flat line.
+- Commands whose end was never seen (the connection dropped or the app closed while they ran) say "exit code unknown" on their card, in Activity, the tray and notifications, rather than implying success. A command that could not be started or confirmed no longer reports a made-up exit code 1 and 0 ms.
+- Cards say "not reported" for values the output did not include instead of showing 0, 0 B or "No errors": Linux free, vmstat, df, ss -s, iotop and sorted ps, Get-Partition sizes, Get-NetAdapterStatistics error counters, Get-Process and tasklist memory, and network device session tables.
+- Stopping a process from a process card or from "Using CPU now"/"Using memory" can no longer end a different program that later got the same process ID. The inserted command first checks that the process still has the start time the list showed; if the process has exited or its ID now belongs to another process, it stops nothing and says so. Where the start time isn't known (for example `ps aux` output), the menu says the stop is not verified.
+- On Linux hosts over SSH, the Top consumers row actions insert `kill` and `ps` instead of PowerShell's `Stop-Process` and `Get-Process`.
+- When you stop a running command, a process whose ID was reused in the moment the app looks for the command's child processes is no longer counted as one of them.
+- Hyper-V cards fill in their extra details (VM vCPU and memory, VM counts on the host card, disk sizes and checkpoint chains, switches and adapters) on PCs that also have VMware PowerCLI installed. PowerCLI's Get-VM and Get-VMHost used to take over and fail with "You are not currently connected to any servers", leaving those fields empty. The Start, Stop, Checkpoint and other commands the cards insert now name the Hyper-V module too, so they run Hyper-V's cmdlets, and a typed `Hyper-V\Get-VM` gets the Hyper-V card.
+- PowerCLI's `Get-VMHost` no longer hangs, and Stop works on it again. A property BetterTerminal read for the card made PowerCLI print a warning, and the two waited on each other.
+- vSphere cards no longer show deprecation warnings your command never caused, such as "The 'State' property of VMHost type is deprecated" on `Get-VMHost` or "'Version' … is deprecated" on `Get-VM`.
+- vSphere cards fill in their extra details reliably. When a card asked for several details at once, all but the first failed with "You are not currently connected to any servers"; they also work while another command runs.
+- vSphere cards name PowerCLI's module in their background lookups too, so a Hyper-V module loaded later in the same tab can't take them over.
+- vSphere lists keep every row complete: `Get-VM`, `Get-HardDisk`, `Get-NetworkAdapter`, `Get-Snapshot`, `Get-VirtualPortGroup` and `Get-Task` no longer drop values after the first row ("2 of 3 rows have missing values", disks and NICs without their VM).
+- The `Connect-VIServer` card hides `SessionId`, which is the vSphere session cookie. A numeric session ID, as in `Get-Process`, is still shown.
+- A standalone ESXi host is no longer called a "cluster host".
+- A VM's power state, VMware Tools status and snapshot memory state read correctly on vSphere detail cards. `Get-View` showed "state not printed" and a stray "3".
+- The VM list no longer shows a "Tags" column reading "vm" for every VM: a VM's folder is shown only when it isn't the default one. Beside "snapshots > 6 months", the second tile now reads "7 days – 6 months".
+- A powered-off VM's network adapters are no longer flagged as disconnected.
+- Snapshot groups show VM names as they are, not in capitals. Memory on a stopped vSphere VM reads "configured", not "startup".
+- Task durations from 1 ms to a second show in milliseconds instead of "0 s".
+- The event strip's time axis uses local dates, and adds the time of day when the events span under four days. vSphere events no longer show "ID 0".
+
 ### 1.19.0 - 2026-11-19
 
 #### Added
