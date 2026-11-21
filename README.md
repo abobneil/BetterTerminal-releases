@@ -4,6 +4,10 @@ BetterTerminal is a Windows desktop PowerShell console for sysadmins who work on
 commands locally or over WinRM or SSH, and see the output as searchable tables, service and system cards and
 charts alongside live host metrics.
 
+[![A 100-second tour of BetterTerminal: service cards, live metrics, Ask AI, Linux, network and hypervisor tabs, files, library, alerts and the command palette (demo data)](media/betterterminal-demo.gif)](media/betterterminal-demo.mp4)
+
+**[▶ Watch the demo in 1080p](media/betterterminal-demo.mp4)** (1:42, MP4). The preview above plays at double speed.
+
 This repository publishes BetterTerminal's releases and the feed installed copies use to update themselves.
 It contains no source code.
 
