@@ -24,6 +24,20 @@ the SHA-256 of every download.
 
 ## Release notes
 
+### 1.21.0 - 2026-11-24
+
+#### Added
+
+- Install, hide and show updates, and restart this PC, without running BetterTerminal as administrator. On this PC's tab, those buttons now queue the change in a new Admin changes list in the updates alert. Review and run shows the exact command, and Windows asks for an administrator once for the whole list. Nothing of BetterTerminal's runs as administrator: the command is Windows' own PowerShell, shown in full under Show more details in Windows' prompt, so you can check it there before you say yes. This works when that prompt asks for a separate administrator account.
+- Each queued update is changed only at the version you queued. If Windows Update replaces it before the run, it is left alone and the list says so. Afterwards, the result of each change is read back from Windows Update itself.
+- Restart as administrator, for work on this PC that needs the whole app elevated: press Ctrl+K and search for it. BetterTerminal asks first if closing would stop running work, and declining the Windows prompt leaves everything as it was. On a standard Windows account it says first that the new window runs as the administrator account, with that account's own settings, history, saved hosts and vault.
+- Hide optional updates you don't want. Each optional update has a Hide button, which hides it in Windows Update itself (as Microsoft's "Show or hide updates" tool does), so Windows and BetterTerminal stop offering it. Hidden updates are listed in a collapsed Hidden group with a Show button to offer them again. Hiding needs an administrator: on this PC it joins the Admin changes list; on a remote host BetterTerminal makes the change through a one-off SYSTEM task, as installs do.
+
+#### Fixed
+
+- On a Windows host connected over WinRM, the pending updates list now updates after you install or hide updates. It used to keep showing the list from the first check.
+- Starting BetterTerminal normally while a copy runs as administrator under the same Windows account now says so, instead of failing to start.
+
 ### 1.20.0 - 2026-11-21
 
 #### Added
