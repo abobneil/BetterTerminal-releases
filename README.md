@@ -24,6 +24,23 @@ the SHA-256 of every download.
 
 ## Release notes
 
+### 1.22.0 - 2026-11-25
+
+#### Added
+
+- Connect to your devices over the internet with Tailscale, built into BetterTerminal. Sign in from Settings → Tailscale: Tailscale's page opens in your browser, so Google, Microsoft, GitHub and your company's sign-in work, or paste an auth key your tailnet hands out. Nothing else needs installing, and only BetterTerminal's own connections use the tailnet; the rest of the PC isn't affected.
+- The connect dialog lists your tailnet's devices, online first, with their tailnet address, when offline ones were last seen, and which run Tailscale SSH. Pick one and BetterTerminal chooses SSH for Linux and macOS or WinRM for Windows. Names in your tailnet and 100.x addresses go through it on their own; for anything else, such as a NAS behind your homelab's subnet router, tick Through the tailnet.
+- Devices running Tailscale SSH sign you in with your tailnet identity, with no password or key to set up. SSH and WinRM hosts work as before, with host keys and saved sign-ins kept under the device's own name.
+- Profiles, to keep Personal and Business apart. Each profile has its own Tailscale account, saved hosts, sign-ins, saved passwords, shared credentials, command history and incidents; settings, the library and runbooks are shared. Switch from the title bar or Settings → Profiles. Tabs keep running when you switch, show their profile's color, and both profiles' tailnets can be connected at the same time. Everything you had before becomes the Personal profile.
+- Tailscale options per profile: use subnet routes (on by default), a custom control server for Headscale, and whether to send Tailscale's client logs to Tailscale (off by default; some business tailnets require it). BetterTerminal warns before this PC's Tailscale key expires and when a tailnet needs you to sign in again.
+- When Tailscale's servers can't be reached, for example behind a firewall or web filter that blocks them, Settings says so instead of waiting.
+- Settings → Module packs now has a Windows RSAT section listing Active Directory, Group Policy, DNS Server and DHCP Server tools, whether each is installed on this PC, and an Install with Windows button. Before, RSAT was only offered after one of its commands failed. Windows asks for an administrator's permission first.
+- Network map: a map of everything this PC can see about a network, built up through the layers from link speeds, VLANs and switch ports to subnets, open ports, certificates and published services. Open it with Ctrl+Shift+M. Scans run at three levels you choose: Look reads only this PC; Ask around finds devices on the subnets you tick; Probe also checks ports, greetings and TLS certificates, after you confirm the targets each time. Large, public, VPN and Public-network scopes need an explicit confirmation.
+- Cards you run in any tab add to the map automatically: neighbours, MAC and ARP tables, VLANs, spanning tree, ports and routes from network devices, virtual switches and VMs from hypervisors, and this PC's network commands. You can turn this off per map.
+- A network scan can sign in on its own to devices that already have a saved SSH sign-in, read them with read-only commands and sign out, without ever asking for anything. Devices it couldn't read are listed with the reason. It can also read devices over SNMP v2c or v3 with credentials you save in the vault.
+- Each scan leaves a card on the timeline with its layers, counts, what changed and everything it read or signed in to, and shows in Activity with Stop.
+- In the map: topology by cabling or subnets, an outline, device and service tables, flows with an A-to-B path trace, changes between scans, and every fact's source and certainty. Rename devices, add notes and tags, and merge duplicates. Export as SVG, PNG, draw.io, Mermaid, JSON or CSV, with addresses and names redacted by default.
+
 ### 1.21.0 - 2026-11-24
 
 #### Added
